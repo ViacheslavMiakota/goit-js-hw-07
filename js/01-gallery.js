@@ -29,6 +29,13 @@ function onClickGaleryItem(event) {
     `<img src="${event.target.dataset.source}" width="800" height="600">`
   );
   instance.show();
+  window.addEventListener("keydown", onEscKeyPress);
+  function onEscKeyPress(event) {
+    if (event.code === "Escape") {
+      instance.close();
+    }
+  }
+  console.log(event.code);
 }
 
 console.log(galleryRef);
