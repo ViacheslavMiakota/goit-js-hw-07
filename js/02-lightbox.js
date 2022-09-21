@@ -6,19 +6,12 @@ console.log(galleryItems);
 const galleryRef = document.querySelector(".gallery");
 const listItems = galleryItems
   .map(({ preview, original, description }) => {
-    return `<a class="gallery__item" href="${preview}">
+    return `<a class="gallery__item" href="${original}">
   <img class="gallery__image" src="${preview}" alt="${description}" />
 </a>`;
   })
   .join("");
 galleryRef.insertAdjacentHTML("beforeend", listItems);
-galleryRef.addEventListener("click", onClickGaleryItem);
-function onClickGaleryItem(event) {
-  event.preventDefault();
-  if (!event.target.classList.contains("gallery__image"))
-    return;
-  console.log(event.code);
-}
 const lightBox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 250,

@@ -11,7 +11,7 @@ const listItems = galleryItems
     <img
        class="gallery__image"
        src="${preview}"
-       data-source="${original}"
+       data-source="${original}"укааукауцк
        alt="${description}"
     />
   </a>
@@ -26,16 +26,31 @@ function onClickGaleryItem(event) {
   if (!event.target.classList.contains("gallery__image"))
     return;
   const instance = basicLightbox.create(
-    `<img src="${event.target.dataset.source}" width="800" height="600">`
-  );
-  instance.show();
-  window.addEventListener("keydown", onEscKeyPress);
-  function onEscKeyPress(event) {
-    if (event.code === "Escape") {
-      instance.close();
+    `<img src="${event.target.dataset.source}" width="800" height="600">`,
+    {
+      onShow: (instance) => {
+        window.addEventListener(
+          "keydown",
+          function (event) {
+            if (event.code === "Escape") {
+              return instance.close();
+            }
+          }
+        );
+      },
+      onClose: (instance) => {
+        window.addEventListener(
+          "keydown",
+          function (event) {
+            if (event.code === "Escape") {
+              return instance.close();
+            }
+          }
+        );
+      },
     }
-  }
+  );
+
+  instance.show();
   console.log(event.code);
 }
-
-console.log(galleryRef);
